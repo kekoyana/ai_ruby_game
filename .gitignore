@@ -1,0 +1,32 @@
+# gnore bundler config.
+.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp
+
+# Ignore .env files
+.env*
+
+# Ignore byebug command history file.
+.byebug_history
+
+# Ignore uploaded files in development.
+/storage/*
+!/storage/.keep
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+# Ignore yarn installation directory.
+/node_modules
+
+# Ignore uploaded files in production
+/public/system/*
+!/public/system/.keep
+I
