@@ -3,4 +3,5 @@ ChatGPTにRubyのゲームをいろいろ作らせます。
 
 Tetris諦めた。
 Dungeonできた。
+2048できた
 
