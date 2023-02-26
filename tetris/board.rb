@@ -34,9 +34,9 @@ class Board
     # テトリミノを回転させる
     tetromino.rotate
     # 回転後の形状がボードの外に出る場合は回転を取り消す
-    if tetromino.x.negative? || tetromino.x + tetromino.width > WIDTH || tetromino.y + tetromino.height > HEIGHT || collision?(tetromino)
-      tetromino.shape = old_shape
-    end
+    return unless tetromino.x.negative? || tetromino.x + tetromino.width > WIDTH || tetromino.y + tetromino.height > HEIGHT || collision?(tetromino)
+
+    tetromino.shape = old_shape
   end
 
   # テトリミノを削除する
@@ -52,13 +52,8 @@ class Board
   def bottom_collision?(tetromino)
     tetromino.shape.each_with_index do |row, i|
       row.each_with_index do |cell, j|
-        if cell == 1
-          if tetromino.y + i == HEIGHT - 1
-            return true
-          elsif @grid[tetromino.y + i + 1][tetromino.x + j] != 0
-            return true
-          end
-        end
+        next unless cell == 1
+        return true if (tetromino.y + i == HEIGHT - 1) || @grid[tetromino.y + i + 1][tetromino.x + j] != 0
       end
     end
     false
@@ -69,9 +64,7 @@ class Board
     tetromino.shape.each_with_index do |row, i|
       row.each_with_index do |cell, j|
         next unless cell == 1
-        if (tetromino.x + j).negative? || tetromino.x + j >= WIDTH || tetromino.y + i >= HEIGHT || @grid[tetromino.y + i][tetromino.x + j] != 0
-          return true
-        end
+        return true if (tetromino.x + j).negative? || tetromino.x + j >= WIDTH || tetromino.y + i >= HEIGHT || @grid[tetromino.y + i][tetromino.x + j] != 0
       end
     end
     false

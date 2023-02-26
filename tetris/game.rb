@@ -18,7 +18,7 @@ class Game
     loop do
       # 新しいテトリミノを生成する
       @tetromino = Tetromino.new(Tetromino::BLOCKS.keys.sample)
-      @tetromino.x = Board::WIDTH / 2 - @tetromino.width / 2
+      @tetromino.x = (Board::WIDTH / 2) - (@tetromino.width / 2)
       @tetromino.y = 0
 
       loop do
