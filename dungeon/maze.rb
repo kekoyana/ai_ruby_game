@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Maze
   include MazeExt
   WALL = 1
@@ -17,7 +19,7 @@ class Maze
   end
 
   def to_s
-    @data.map { |row| row.map { |cell| cell == WALL ? '#' : ' ' }.join('') }.join("\n")
+    @data.map { |row| row.map { |cell| cell == WALL ? '#' : ' ' }.join }.join("\n")
   end
 
   private
@@ -32,11 +34,11 @@ class Maze
     visited[y][x] = true
     neighbors = [[x, y - 2], [x, y + 2], [x - 2, y], [x + 2, y]].shuffle
     neighbors.each do |nx, ny|
-      if ny.between?(0, @height - 1) && nx.between?(0, @width - 1) && !visited[ny][nx]
-        @data[ny][nx] = PATH
-        @data[(y + ny) / 2][(x + nx) / 2] = PATH
-        dfs(visited, nx, ny)
-      end
+      next unless ny.between?(0, @height - 1) && nx.between?(0, @width - 1) && !visited[ny][nx]
+
+      @data[ny][nx] = PATH
+      @data[(y + ny) / 2][(x + nx) / 2] = PATH
+      dfs(visited, nx, ny)
     end
   end
 end
